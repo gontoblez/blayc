@@ -1,0 +1,91 @@
+#! /usr/bin/bash
+
+#stty intr $'\e'
+
+red="\e[0;91m"
+blue="\e[0;94m"
+expand_bg="\e[K"
+blue_bg="\e[0;104m${expand_bg}"
+red_bg="\e[0;101m${expand_bg}"
+green_bg="\e[0;102m${expand_bg}"
+green="\e[0;92m"
+white="\e[0;97m"
+bold="\e[1m"
+uline="\e[4m"
+reset="\e[0m"
+
+### specify where you store your music
+music=""
+
+# if cmus and cmus-remote exist on the user's system, you may prompt the user to
+# search for a song
+if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
+    #read input from user (to search for song)
+    read -p " Play: " song_to_play
+    #remove spaces in the song and store the value in the $song variable
+    song=$(echo "$song_to_play" | sed 's/ //g')
+    #try to find the song in music directory
+    if [[ -n "$music" ]]; then
+        play=$(find "$music" -type f -iname "*$song*")
+    else
+        play=$(find $HOME/Music -type f -iname "*$song*")
+    fi
+
+    case $play in
+        "")
+            #if the song doesn't exist, state that the song doesn't exist and
+            #exit the script
+            sleep 0.2
+            echo "Song not found :("	   
+            sleep 0.2
+            echo "Please refer to the README.md for more info."
+            sleep 3
+            ;;
+
+        *)
+            #if song exist, tell user it does, play it, and exit the script
+            echo "Song found!"
+            sleep 0.2
+            echo "Playing..."
+            sleep 0.3
+            cmus-remote -C "player-play $play"
+            ;;
+    esac
+else
+    #if cmus and cmus remote were not found, then try to install the program
+    #NOTE: WILL ONLY INSTALL FOR DEBIAN BASED SYSTEMS
+    echo -e "\n${red}::Error:\n       CMUS is not installed.${reset}"
+    if [[ -d /etc/apt ]] || [[ -d /etc/pacman.d ]]; then
+        echo -en "Do you want to install it? [${blue}Y${reset}/${red}n${reset}] "
+        read installAnswer
+
+        if [[ -d /etc/apt ]]; then
+
+            case $installAnswer in
+                Y|y|"") echo -e "Please enter your sudo password to install CMUS."
+                    sudo apt update && sudo apt install cmus -y
+                    ;;
+                N|n) echo -e "${red}Aborting.${reset}"
+                    ;;
+                *) echo -e "${red}Unknown entry. Aborting.${reset}"
+                    ;;
+            esac
+
+        fi
+        if [[ -d /etc/pacman.d ]]; then
+
+            case $installAnswer in
+                Y|y|"") echo -e "Please enter your sudo password to install CMUS."
+                    sudo pacman -S cmus
+                    ;;
+                N|n) echo -e "${red}Aborting.${reset}"
+                    ;;
+                *) echo -e "${red}Unknown entry. Aborting.${reset}"
+                    ;;
+            esac
+
+        fi
+    else
+        echo "Please install it and retry. For more info, please refer to the README.md"
+    fi
+fi
