@@ -49,14 +49,10 @@ for_window [class=blayc] resize set 700 150
 for_window [class=blayc] move position 610 465
 ```
 #### Naming Music Files
-Music files (not the metadata) shouldn't have spaces in them. The words should be 
-merged together (you can do camel-case if you want to).
+Music files shouldn't have possessive 's in them.
 
-For example, a song named "Sing Sang Sung" should be present in your filesystem as
-`SingSangSung.[extension]`. 
-
-Note: I will try to change this in the future so it doesn't
-require the user to write song names in a specific format.
+For example, a song named "Steve's Car.mp3" should be present in your filesystem as
+`Steves Car.mp3`. 
 
 ## Troubleshooting
 
