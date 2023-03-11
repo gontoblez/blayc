@@ -2,6 +2,7 @@
 pronounced Blay-see
 
 - [Introduction](#introduction)
+- [Features](#features)
 - [Installation](#installation)
 - [Recommended Usage](#recommended-usage)
 - [Troubleshooting](#troubleshooting)
@@ -11,6 +12,14 @@ pronounced Blay-see
 Blay-C is a bash script that queries song/music and playes it using [cmus](https://cmus.github.io/).
 Blay-C does **NOT** play music by itslef, it uses cmus to play them. Blay-C is just a
 search engine for your music.
+
+## Features
+
+- [x] Query for music.
+- [x] Echo error if music is not found.
+- [x] No restrictions on naming files.
+- [ ] Detect cmus not running.
+- [ ] Launch cmus if not running.
 
 ## Installation
 
