@@ -23,7 +23,7 @@ if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
     #read input from user (to search for song)
     read -p " Play: " song_to_play
     #remove spaces in the song and store the value in the $song variable
-    song=$(echo "$song_to_play" | sed 's/ //g')
+    song=$(echo "$song_to_play" | sed 's/ /?/g')
     #try to find the song in music directory
     if [[ -n "$music" ]]; then
         play=$(find "$music" -type f -iname "*$song*")
