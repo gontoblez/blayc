@@ -32,7 +32,7 @@ cmus-remote
 
 To install:
 ```language
-$ git clone https://github.com/folynx/blayc.git
+$ git clone https://github.com/gontoblez/blayc.git
 $ chmod +x blayc 
 $ mv blayc $HOME/.local/bin
 ```
