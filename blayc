@@ -8,6 +8,14 @@ query_and_process () {
     song=$(echo "$song_to_play" | sed 's/ /?/g')
 }
 
+find_song () {
+    if [[ -n "$music" ]]; then
+        play=$(find "$music" -type f -iname "*$song*")
+    else
+        play=$(find $HOME/Music -type f -iname "*$song*")
+    fi
+}
+
 #stty intr $'\e'
 
 red="\e[0;91m"
@@ -30,13 +38,7 @@ music=""
 if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
     if [[ -n $(pidof cmus) ]]; then
         query_and_process
-
-        if [[ -n "$music" ]]; then
-            play=$(find "$music" -type f -iname "*$song*")
-        else
-            play=$(find $HOME/Music -type f -iname "*$song*")
-        fi
-
+        find_song
         case $play in
             "")
                 #if the song doesn't exist, state that the song doesn't exist and
