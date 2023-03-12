@@ -17,8 +17,10 @@ search engine for your music.
 
 - [x] Query for music.
 - [x] Echo error if music is not found.
+- [x] Check if cmus is installed.
+- [x] Install cmus if not installed
 - [x] No restrictions on naming files.
-- [ ] Detect cmus not running.
+- [x] Detect cmus not running.
 - [ ] Launch cmus if not running.
 
 ## Installation
