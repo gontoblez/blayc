@@ -21,7 +21,7 @@ search engine for your music.
 - [x] Install cmus if not installed
 - [x] No restrictions on naming files.
 - [x] Detect cmus not running.
-- [ ] Launch cmus if not running.
+- [x] Launch cmus if not running.
 
 ## Installation
 
