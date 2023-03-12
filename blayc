@@ -1,5 +1,5 @@
 #! /bin/bash
-
+set -x
 #stty intr $'\e'
 
 red="\e[0;91m"
@@ -53,13 +53,34 @@ if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
                 ;;
         esac
         else
-            echo "Looks like cmus is not running."
+            echo "Error: cmus is NOT running."
             sleep 0.3
-            echo "Start cmus and try again."
-            sleep 0.3
-            echo "Please refer to the README.md for more info."
-            sleep 5
-            exit 4
+            read -p "Do you want to run it? [y/n] " run_cmus
+            while [[ "$run_cmus" != "Y" ]] && [[ $run_cmus != "y" ]] && [[ "$run_cmus" != "N" ]] && [[ "$run_cmus" != "n" ]]; do
+                read -p "Please enter one of the provided options. " run_cmus
+            done
+            case "$run_cmus" in
+                Y|y|"") read -p "Please enter the binary of the terminal you use (keep empty if you don't know) " terminal
+                    if [[ -n "$terminal" ]]; then
+                        if [[ "$terminal" == "kitty" ]]; then
+                            nohup "$terminal" -e cmus >/dev/null 2>&1 & disown
+                        else
+                            "$terminal" -e cmus & disown > /dev/null
+                        fi
+                        echo "hi"
+                        sleep 2
+                        echo
+                    else
+                        echo "Open a terminal window, start cmus and try again."
+                        sleep 5s
+                        exit
+                    fi
+                ;;
+                N|n) echo "Okay. See you soon."
+                    sleep 3s
+                    exit
+                ;;
+            esac
     fi
 else
     #if cmus and cmus remote were not found, then try to install the program
