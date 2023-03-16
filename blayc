@@ -16,10 +16,11 @@ find_audio () {
 
 audio_not_found () {
     sleep 0.2
-    echo "Song not found :("	   
+    echo -e "${red}:: Error:${reset}"	   
+    echo "    Audio not found"	   
     sleep 0.2
-    echo "Please refer to the README.md for more info."
-    sleep 3
+    echo "==> Please refer to the README.md for more info."
+    sleep 2
 }
 
 play_audio () {
