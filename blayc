@@ -24,7 +24,7 @@ audio_not_found () {
 }
 
 play_audio () {
-    echo "Song found!"
+    echo "=> Audio found!"
     sleep 0.2
     echo "Playing..."
     sleep 0.3
