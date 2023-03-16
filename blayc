@@ -1,7 +1,7 @@
 #! /bin/bash
 query_and_process () {
     #read input from user (to search for song)
-    read -p " Play: " song_to_play
+    read -p ":: Play: " song_to_play
     #remove spaces in the song and store the value in the $song variable
     song=$(echo "$song_to_play" | sed 's/ /?/g')
 }
