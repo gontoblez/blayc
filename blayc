@@ -1,4 +1,21 @@
 #! /bin/bash
+
+#stty intr $'\e'
+
+music=""
+
+red="\e[0;91m"
+blue="\e[0;94m"
+expand_bg="\e[K"
+blue_bg="\e[0;104m${expand_bg}"
+red_bg="\e[0;101m${expand_bg}"
+green_bg="\e[0;102m${expand_bg}"
+green="\e[0;92m"
+white="\e[0;97m"
+bold="\e[1m"
+uline="\e[4m"
+reset="\e[0m"
+
 query_and_process () {
     #read input from user (to search for song)
     read -p ":: Play: " song_to_play
@@ -109,25 +126,8 @@ install_cmus () {
 
 
 
-#stty intr $'\e'
 
-red="\e[0;91m"
-blue="\e[0;94m"
-expand_bg="\e[K"
-blue_bg="\e[0;104m${expand_bg}"
-red_bg="\e[0;101m${expand_bg}"
-green_bg="\e[0;102m${expand_bg}"
-green="\e[0;92m"
-white="\e[0;97m"
-bold="\e[1m"
-uline="\e[4m"
-reset="\e[0m"
 
-### specify where you store your music
-music=""
-
-# if cmus and cmus-remote exist on the user's system, you may prompt the user to
-# search for a song
 if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
     if [[ -n $(pidof cmus) ]]; then
         query_and_process
@@ -145,7 +145,5 @@ if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
             start_cmus
     fi
 else
-    #if cmus and cmus remote were not found, then try to install the program
-    #NOTE: WILL ONLY INSTALL FOR DEBIAN BASED SYSTEMS
     install_cmus
 fi
