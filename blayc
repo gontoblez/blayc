@@ -17,9 +17,7 @@ uline="\e[4m"
 reset="\e[0m"
 
 query_and_process () {
-    #read input from user (to search for song)
     read -p ":: Play: " song_to_play
-    #remove spaces in the song and store the value in the $song variable
     song=$(echo "$song_to_play" | sed 's/ /?/g')
 }
 
@@ -124,8 +122,9 @@ install_cmus () {
     fi
 }
 
-
-
+############################################################################
+############################ SCRIPT ########################################
+############################################################################
 
 
 if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
