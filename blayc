@@ -98,7 +98,7 @@ install_cmus_arch () {
 }
 
 install_cmus () {
-    echo -e "\n${red}::Error:\n       CMUS is not installed.${reset}"
+    echo -e "\n${red}:: Error:${reset}\n       CMUS is ${uline}NOT${reset} installed."
     if [[ -d /etc/apt ]] || [[ -d /etc/pacman.d ]]; then
         install_cmus_debian # or if not a debian system,
         install_cmus_arch
