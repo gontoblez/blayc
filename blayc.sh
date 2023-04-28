@@ -17,7 +17,7 @@ reset="\e[0m"
 # bold="\e[1m"
 
 query_and_process () {
-    read -p ":: Play: " song_to_play
+    read -pr ":: Play: " song_to_play
     song=$(echo "$song_to_play" | sed 's/ /?/g')
 }
 
@@ -50,12 +50,12 @@ start_cmus () {
     echo -e "${red}:: Error:${reset}"	   
     echo -e "    cmus is ${uline}NOT${reset} running."
     sleep 0.3
-    read -p "=> Do you want to run it? [y/n] " run_cmus
+    read -pr "=> Do you want to run it? [y/n] " run_cmus
     while [[ "$run_cmus" != "Y" ]] && [[ $run_cmus != "y" ]] && [[ "$run_cmus" != "N" ]] && [[ "$run_cmus" != "n" ]]; do
-        read -p "Please enter one of the provided options. " run_cmus
+        read -rp "Please enter one of the provided options. " run_cmus
     done
     case "$run_cmus" in
-        Y|y|"") read -p "Please enter the binary of the terminal you use (keep empty if you don't know) " terminal
+        Y|y|"") read -rp "Please enter the binary of the terminal you use (keep empty if you don't know) " terminal
             if [[ -n "$terminal" ]]; then
                 if [[ "$terminal" == "kitty" ]]; then
                     nohup "$terminal" -e cmus >/dev/null 2>&1 & disown
@@ -79,7 +79,7 @@ start_cmus () {
 
 install_cmus_debian () {
     echo -en "Do you want to install it? [${blue}Y${reset}/${red}n${reset}] "
-    read installAnswer
+    read -r installAnswer
 
     if [[ -d /etc/apt ]]; then
 
