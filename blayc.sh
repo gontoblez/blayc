@@ -147,7 +147,7 @@ install_cmus () {
 ############################ SCRIPT ########################################
 ############################################################################
 
-while [[ -z "$play" ]]; do
+while [[ -z "$song_to_play" ]]; do
     if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
         if [[ -n $(pidof cmus) ]]; then
             query_and_process
