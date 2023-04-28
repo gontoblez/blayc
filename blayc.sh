@@ -47,30 +47,48 @@ play_audio () {
 }
 
 start_cmus () {
+    # WEEE WEEE WEE WEEE (SIREN)
+    # -e for escape so we can use colors :)
+    # you can read the rest, can't you?
     echo -e "${red}:: Error:${reset}"	   
     echo -e "    cmus is ${uline}NOT${reset} running."
     sleep 0.3
+
+    # In the while-loop below, [Yy] means "Y" or "y". Same goes for [Nn].
     while [[ "$run_cmus" != [Yy] ]] && [[ "$run_cmus" != [Nn] ]]; do
         read -rp "=> Do you want to run it? [y/n] " run_cmus
     done
+
     case "$run_cmus" in
+        # if the user answers Y or y, they will be asked for their terminal's binary
         Y|y|"") read -rp "Please enter the binary of the terminal you use (keep empty if you don't know) " terminal
+        # WHAT TERMINAL EMULATOR DO YOU USE?????
             if [[ -n "$terminal" ]]; then
+                # Kitty terminal is weird when it comes to disowning processes
                 if [[ "$terminal" == "kitty" ]]; then
                     nohup "$terminal" -e cmus >/dev/null 2>&1 & disown
                 else
+                    # Ah yes, normal terminals
                     "$terminal" -e cmus & disown > /dev/null
                 fi
+                # some dramatic effects
                 sleep 2
+                # new line (i should find a better way to do this)
                 echo
             else
+                # you don't know the terminal emulator you're using? good lord.
                 echo "Open a terminal window, start cmus and try again."
+                # give the user some time to read (if they can read that is)
                 sleep 5s
+                # bye
                 exit
             fi
             ;;
+            # how dare you
         N|n) echo "Okay. See you soon."
+        # dramatic effects AGAIN
             sleep 3s
+            # bye
             exit
             ;;
     esac
