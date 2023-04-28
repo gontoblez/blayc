@@ -83,7 +83,7 @@ install_cmus_debian () {
     if [[ -d /etc/apt ]]; then
 
         case $installAnswer in
-            Y|y|"") echo -e "Please enter your sudo password to install CMUS."
+            Y|y|"") echo -e "Please enter your password to install CMUS."
                 sudo apt update && sudo apt install cmus -y
                 ;;
             N|n) echo -e "${red}Aborting.${reset}"
