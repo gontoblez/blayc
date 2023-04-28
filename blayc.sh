@@ -50,7 +50,7 @@ start_cmus () {
     echo -e "${red}:: Error:${reset}"	   
     echo -e "    cmus is ${uline}NOT${reset} running."
     sleep 0.3
-    read -r "=> Do you want to run it? [y/n] " run_cmus
+    read -rp "=> Do you want to run it? [y/n] " run_cmus
     while [[ "$run_cmus" != "Y" ]] && [[ $run_cmus != "y" ]] && [[ "$run_cmus" != "N" ]] && [[ "$run_cmus" != "n" ]]; do
         read -rp "Please enter one of the provided options. " run_cmus
     done
