@@ -62,8 +62,10 @@ start_cmus () {
     case "$run_cmus" in
         # if the user answers Y or y, they will be asked for their terminal's binary
         Y|y|"") read -rp "Please enter the binary of the terminal you use (keep empty if you don't know) " terminal
+
         # WHAT TERMINAL EMULATOR DO YOU USE?????
             if [[ -n "$terminal" ]]; then
+
                 # Kitty terminal is weird when it comes to disowning processes
                 if [[ "$terminal" == "kitty" ]]; then
                     nohup "$terminal" -e cmus >/dev/null 2>&1 & disown
@@ -71,6 +73,7 @@ start_cmus () {
                     # Ah yes, normal terminals
                     "$terminal" -e cmus & disown > /dev/null
                 fi
+
                 # some dramatic effects
                 sleep 2
                 # new line (i should find a better way to do this)
@@ -84,6 +87,7 @@ start_cmus () {
                 exit
             fi
             ;;
+
             # how dare you
         N|n) echo "Okay. See you soon."
         # dramatic effects AGAIN
