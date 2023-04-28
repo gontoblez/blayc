@@ -50,7 +50,7 @@ start_cmus () {
     echo -e "${red}:: Error:${reset}"	   
     echo -e "    cmus is ${uline}NOT${reset} running."
     sleep 0.3
-    read -pr "=> Do you want to run it? [y/n] " run_cmus
+    read -r "=> Do you want to run it? [y/n] " run_cmus
     while [[ "$run_cmus" != "Y" ]] && [[ $run_cmus != "y" ]] && [[ "$run_cmus" != "N" ]] && [[ "$run_cmus" != "n" ]]; do
         read -rp "Please enter one of the provided options. " run_cmus
     done
@@ -126,23 +126,25 @@ install_cmus () {
 ############################ SCRIPT ########################################
 ############################################################################
 
+echo "$play"
+while [[ -z "$play" ]]; do
+    if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
+        if [[ -n $(pidof cmus) ]]; then
+            query_and_process
+            find_audio
+            case $play in
+                "")
+                    audio_not_found
+                    ;;
 
-if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
-    if [[ -n $(pidof cmus) ]]; then
-        query_and_process
-        find_audio
-        case $play in
-            "")
-                audio_not_found
-                ;;
-
-            *)
-                play_audio
-                ;;
-        esac
+                *)
+                    play_audio
+                    ;;
+            esac
         else
             start_cmus
+        fi
+    else
+        install_cmus
     fi
-else
-    install_cmus
-fi
+done
