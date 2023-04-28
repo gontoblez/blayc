@@ -25,7 +25,7 @@ find_audio () {
     if [[ -n "$music" ]]; then
         play=$(find "$music" -type f -iname "*$song*")
     else
-        play=$(find $HOME/Music -type f -iname "*$song*")
+        play=$(find "$HOME/Music" -type f -iname "*$song*")
     fi
 }
 
