@@ -17,8 +17,8 @@ reset="\e[0m"
 # bold="\e[1m"
 
 query_and_process () {
-    read -pr ":: Play: " song_to_play
-    song=$(echo "$song_to_play" | sed 's/ /?/g')
+    read -rp ":: Play: " song_to_play
+    song=${song_to_play//\ /?}
 }
 
 find_audio () {
