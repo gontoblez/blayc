@@ -22,6 +22,8 @@ query_and_process () {
 }
 
 find_audio () {
+    # if music location variable specified, search through it
+    # if not, search in the default music directory
     if [[ -n "$music" ]]; then
         play=$(find "$music" -type f -iname "*$song*")
     else
