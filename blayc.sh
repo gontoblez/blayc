@@ -32,11 +32,16 @@ find_audio () {
 }
 
 audio_not_found () {
+    # dramatic sleep effect
     sleep 0.2
+    # scream at user
     echo -e "${red}:: Error:${reset}"	   
     echo "    Audio not found"	   
     sleep 0.2
+    # referring the user to the README. ik i shouldn't do this
+    # any suggestions?
     echo "==> Please refer to the README.md for more info."
+    # dramatic effects againk
     sleep 2
 }
 
