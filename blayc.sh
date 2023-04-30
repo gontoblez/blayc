@@ -68,10 +68,10 @@ start_cmus () {
 
     case "$run_cmus" in
         # if the user answers Y or y, they will be asked for their terminal's binary
-        Y|y|"") read -rp "Please enter the binary of the terminal you use (keep empty if you don't know) " terminal
+        [Yy]) read -rp "Please enter the binary of the terminal you use (keep empty if you don't know) " terminal
 
         # WHAT TERMINAL EMULATOR DO YOU USE?????
-            if [[ -n "$terminal" ]]; then
+        if [[ -n "$terminal" ]]; then
 
                 # Kitty terminal is weird when it comes to disowning processes
                 if [[ "$terminal" == "kitty" ]]; then
@@ -92,12 +92,12 @@ start_cmus () {
                 sleep 5s
                 # bye
                 exit
-            fi
-            ;;
+        fi
+        ;;
 
             # how dare you
-        N|n) echo "Okay. See you soon."
-        # dramatic effects AGAIN
+            [Nn]) echo "Okay. See you soon."
+            # dramatic effects AGAIN
             sleep 3s
             # bye
             exit
@@ -112,10 +112,10 @@ install_cmus_debian () {
     if [[ -d /etc/apt ]]; then
 
         case $installAnswer in
-            Y|y|"") echo -e "Please enter your password to install CMUS."
+            [Yy]) echo -e "Please enter your password to install CMUS."
                 sudo apt update && sudo apt install cmus -y
                 ;;
-            N|n) echo -e "${red}Aborting.${reset}"
+            [Nn]) echo -e "${red}Aborting.${reset}"
                 ;;
             *) echo -e "${red}Unknown entry. Aborting.${reset}"
                 ;;
@@ -128,10 +128,10 @@ install_cmus_arch () {
     if [[ -d /etc/pacman.d ]]; then
 
         case $installAnswer in
-            Y|y|"") echo -e "Please enter your sudo password to install CMUS."
+            [Yy]) echo -e "Please enter your sudo password to install CMUS."
                 sudo pacman -S cmus
                 ;;
-            N|n) echo -e "${red}Aborting.${reset}"
+            [Nn]) echo -e "${red}Aborting.${reset}"
                 ;;
             *) echo -e "${red}Unknown entry. Aborting.${reset}"
                 ;;
