@@ -16,10 +16,10 @@ reset="\e[0m"
 # white="\e[0;97m"
 # bold="\e[1m"
 
-query_and_process () {
-    read -rp ":: Play: " song_to_play
-    song=${song_to_play//\ /?}
-}
+# query_and_process () {
+#     read -rp ":: Play: " song_to_play
+#     song=${song_to_play//\ /?}
+# }
 
 find_audio () {
     # if music location variable specified, search through it
@@ -157,7 +157,11 @@ install_cmus () {
 while [[ -z "$song_to_play" ]]; do
     if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
         if [[ -n $(pidof cmus) ]]; then
-            query_and_process
+            # get user input and store it in song_to_play
+            read -rp ":: Play: " song_to_play
+            # ${var//search/replace}, searching for the string " " and
+            # replacing it with the wildcard "?" and storing it in $song
+            song=${song_to_play//\ /?}
             find_audio
             case $play in
                 "")
