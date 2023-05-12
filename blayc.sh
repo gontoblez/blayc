@@ -21,15 +21,15 @@ reset="\e[0m"
 #     song=${song_to_play//\ /?}
 # }
 
-find_audio () {
-    # if music location variable specified, search through it
-    # if not, search in the default music directory
-    if [[ -n "$music" ]]; then
-        play=$(find "$music" -type f -iname "*$song*")
-    else
-        play=$(find "$HOME/Music" -type f -iname "*$song*")
-    fi
-}
+# find_audio () {
+#     # if music location variable specified, search through it
+#     # if not, search in the default music directory
+#     if [[ -n "$music" ]]; then
+#         play=$(find "$music" -type f -iname "*$song*")
+#     else
+#         play=$(find "$HOME/Music" -type f -iname "*$song*")
+#     fi
+# }
 
 audio_not_found () {
     # dramatic sleep effect
@@ -162,7 +162,15 @@ while [[ -z "$song_to_play" ]]; do
             # ${var//search/replace}, searching for the string " " and
             # replacing it with the wildcard "?" and storing it in $song
             song=${song_to_play//\ /?}
-            find_audio
+
+            # if music location variable specified, search through it
+            # if not, search in the default music directory
+            if [[ -n "$music" ]]; then
+                play=$(find "$music" -type f -iname "*$song*")
+            else
+                play=$(find "$HOME/Music" -type f -iname "*$song*")
+            fi
+
             case $play in
                 "")
                     audio_not_found
