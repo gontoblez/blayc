@@ -140,43 +140,43 @@ reset="\e[0m"
 #     fi
 # }
 
-install_cmus () {
-    echo -e "\n${red}:: Error:${reset}\n       CMUS is ${uline}NOT${reset} installed."
-    if [[ -d /etc/apt ]] || [[ -d /etc/pacman.d ]]; then
-        echo -en "Do you want to install it? [${blue}Y${reset}/${red}n${reset}] "
-        read -r installAnswer
-        # DEBIAN LINUX INSTALLATION
-        if [[ -d /etc/apt ]]; then
-
-            case $installAnswer in
-                [Yy]) echo -e "Please enter your password to install CMUS."
-                    sudo apt update && sudo apt install cmus -y
-                    ;;
-                [Nn]) echo -e "${red}Aborting.${reset}"
-                    ;;
-                *) echo -e "${red}Unknown entry. Aborting.${reset}"
-                    ;;
-            esac
-
-        fi
-        # ARCH LINUX INSTALLATION
-        if [[ -d /etc/pacman.d ]]; then
-
-            case $installAnswer in
-                [Yy]) echo -e "Please enter your sudo password to install CMUS."
-                    sudo pacman -S cmus
-                    ;;
-                [Nn]) echo -e "${red}Aborting.${reset}"
-                    ;;
-                *) echo -e "${red}Unknown entry. Aborting.${reset}"
-                    ;;
-            esac
-
-        fi
-    else
-        echo "Please install it and retry. For more info, please refer to the README.md"
-    fi
-}
+# install_cmus () {
+#     echo -e "\n${red}:: Error:${reset}\n       CMUS is ${uline}NOT${reset} installed."
+#     if [[ -d /etc/apt ]] || [[ -d /etc/pacman.d ]]; then
+#         echo -en "Do you want to install it? [${blue}Y${reset}/${red}n${reset}] "
+#         read -r installAnswer
+#         # DEBIAN LINUX INSTALLATION
+#         if [[ -d /etc/apt ]]; then
+#
+#             case $installAnswer in
+#                 [Yy]) echo -e "Please enter your password to install CMUS."
+#                     sudo apt update && sudo apt install cmus -y
+#                     ;;
+#                 [Nn]) echo -e "${red}Aborting.${reset}"
+#                     ;;
+#                 *) echo -e "${red}Unknown entry. Aborting.${reset}"
+#                     ;;
+#             esac
+#
+#         fi
+#         # ARCH LINUX INSTALLATION
+#         if [[ -d /etc/pacman.d ]]; then
+#
+#             case $installAnswer in
+#                 [Yy]) echo -e "Please enter your sudo password to install CMUS."
+#                     sudo pacman -S cmus
+#                     ;;
+#                 [Nn]) echo -e "${red}Aborting.${reset}"
+#                     ;;
+#                 *) echo -e "${red}Unknown entry. Aborting.${reset}"
+#                     ;;
+#             esac
+#
+#         fi
+#     else
+#         echo "Please install it and retry. For more info, please refer to the README.md"
+#     fi
+# }
 
 ############################################################################
 ############################ SCRIPT ########################################
@@ -274,6 +274,40 @@ while [[ -z "$song_to_play" ]]; do
             esac
         fi
     else
-        install_cmus
+        echo -e "\n${red}:: Error:${reset}\n       CMUS is ${uline}NOT${reset} installed."
+        if [[ -d /etc/apt ]] || [[ -d /etc/pacman.d ]]; then
+            echo -en "Do you want to install it? [${blue}Y${reset}/${red}n${reset}] "
+            read -r installAnswer
+            # DEBIAN LINUX INSTALLATION
+            if [[ -d /etc/apt ]]; then
+
+                case $installAnswer in
+                    [Yy]) echo -e "Please enter your password to install CMUS."
+                        sudo apt update && sudo apt install cmus -y
+                        ;;
+                    [Nn]) echo -e "${red}Aborting.${reset}"
+                        ;;
+                    *) echo -e "${red}Unknown entry. Aborting.${reset}"
+                        ;;
+                esac
+
+            fi
+            # ARCH LINUX INSTALLATION
+            if [[ -d /etc/pacman.d ]]; then
+
+                case $installAnswer in
+                    [Yy]) echo -e "Please enter your sudo password to install CMUS."
+                        sudo pacman -S cmus
+                        ;;
+                    [Nn]) echo -e "${red}Aborting.${reset}"
+                        ;;
+                    *) echo -e "${red}Unknown entry. Aborting.${reset}"
+                        ;;
+                esac
+
+            fi
+        else
+            echo "Please install it and retry. For more info, please refer to the README.md"
+        fi
     fi
 done
