@@ -103,7 +103,7 @@ while [[ -z "$song_to_play" ]]; do
     else
         echo -e "\n${red}:: Error:${reset}\n       CMUS is ${uline}NOT${reset} installed."
         if [[ -d /etc/apt ]] || [[ -d /etc/pacman.d ]]; then
-            echo -en "Do you want to install it? [${blue}Y${reset}/${red}n${reset}] "
+            echo -en "Do you want to install it? [${blue}y${reset}/${red}n${reset}] "
             read -r installAnswer
             # DEBIAN LINUX INSTALLATION
             if [[ -d /etc/apt ]]; then
@@ -115,6 +115,8 @@ while [[ -z "$song_to_play" ]]; do
                     [Nn]) echo -e "${red}Aborting.${reset}"
                         ;;
                     *) echo -e "${red}Unknown entry. Aborting.${reset}"
+                        sleep 2
+                        exit
                         ;;
                 esac
 
@@ -129,6 +131,8 @@ while [[ -z "$song_to_play" ]]; do
                     [Nn]) echo -e "${red}Aborting.${reset}"
                         ;;
                     *) echo -e "${red}Unknown entry. Aborting.${reset}"
+                        sleep 2
+                        exit
                         ;;
                 esac
 
