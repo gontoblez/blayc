@@ -37,7 +37,7 @@ while [[ -z "$song_to_play" ]]; do
                     # referring the user to the README. ik i shouldn't do this
                     # any suggestions?
                     echo "==> Please refer to the README.md for more info."
-                    # dramatic effects againk
+                    # dramatic effects again
                     sleep 2
                     ;;
 
