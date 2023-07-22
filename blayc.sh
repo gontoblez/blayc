@@ -14,6 +14,7 @@ err_msg() {
     echo -e "    $1"
     echo "==> Please refer to the README.md for more info."
     read -n 1 -r -s -p "Press any key to continue..."
+    echo
 }
 
 run_cmus(){
