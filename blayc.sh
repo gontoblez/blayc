@@ -32,6 +32,7 @@ run_cmus(){
         fi
         # new line (i should find a better way to do this)
         echo
+        sleep 2
     else
         # you don't know the terminal emulator you're using? good lord.
         echo "Open a terminal window, start cmus and try again."
