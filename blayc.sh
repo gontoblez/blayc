@@ -9,6 +9,13 @@ blue="\e[0;94m"
 uline="\e[4m"
 reset="\e[0m"
 
+err_msg() {
+    echo -e "${red}:: Error:${reset}"
+    echo -e "    $1"
+    echo "==> Please refer to the README.md for more info."
+    read -n 1 -r -s -p "Press any key to continue..."
+}
+
 while [[ -z "$song_to_play" ]]; do
     if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
         if [[ -n $(pidof cmus) ]]; then
@@ -28,17 +35,7 @@ while [[ -z "$song_to_play" ]]; do
 
             case $play in
                 "")
-                    # dramatic sleep effect
-                    sleep 0.2
-                    # scream at user
-                    echo -e "${red}:: Error:${reset}"
-                    echo "    Audio not found"
-                    sleep 0.2
-                    # referring the user to the README. ik i shouldn't do this
-                    # any suggestions?
-                    echo "==> Please refer to the README.md for more info."
-                    # dramatic effects again
-                    sleep 2
+                    err_msg "Audio NOT found."
                     ;;
 
                 *)
