@@ -88,7 +88,7 @@ while [[ -z "$song_to_play" ]]; do
                 fi
         fi
     else
-        echo -e "\n${red}:: Error:${reset}\n       CMUS is ${uline}NOT${reset} installed."
+        err_msg "CMUS is ${uline}NOT${reset} installed."
         if [[ -d /etc/apt ]] || [[ -d /etc/pacman.d ]]; then
             echo -en "Do you want to install it? [${blue}y${reset}/${red}n${reset}] "
             read -r installAnswer
