@@ -54,12 +54,12 @@ while [[ -z "$song_to_play" ]]; do
             # if music location variable specified, search through it
             # if not, search in the default music directory
             if [[ -n "$music" ]]; then
-                play=$(find "$music" -type f -iname "*$song*")
+                song_path=$(find "$music" -type f -iname "*$song*")
             else
-                play=$(find "$HOME/Music" -type f -iname "*$song*")
+                song_path=$(find "$HOME/Music" -type f -iname "*$song*")
             fi
 
-            case $play in
+            case $song_path in
                 "")
                     err_msg "Audio NOT found."
                     ;;
@@ -69,7 +69,7 @@ while [[ -z "$song_to_play" ]]; do
                     sleep 0.2
                     echo "Playing..."
                     sleep 0.3
-                    cmus-remote -C "player-play $play"
+                    cmus-remote -C "player-play $song_path"
                     ;;
             esac
         else
