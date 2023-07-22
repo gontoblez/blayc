@@ -57,7 +57,7 @@ play_song(){
         song_path=$(find "$HOME/Music" -type f -iname "*$song*")
     fi
 
-    if $song_path; then
+    if [[ -n $song_path ]]; then
         echo "=> Audio found!"
         sleep 0.2
         echo "Playing..."
