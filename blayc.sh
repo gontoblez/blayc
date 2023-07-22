@@ -42,50 +42,50 @@ run_cmus(){
 
 }
 
+play_song(){
+    # get user input and store it in song_to_play
+    read -rp ":: Play: " song_to_play
+    # ${var//search/replace}, searching for the string " " and
+    # replacing it with the wildcard "?" and storing it in $song
+    song=${song_to_play//\ /?}
+
+    # if music location variable specified, search through it
+    # if not, search in the default music directory
+    if [[ -n "$music" ]]; then
+        song_path=$(find "$music" -type f -iname "*$song*")
+    else
+        song_path=$(find "$HOME/Music" -type f -iname "*$song*")
+    fi
+
+    if $song_path; then
+        echo "=> Audio found!"
+        sleep 0.2
+        echo "Playing..."
+        sleep 0.3
+        cmus-remote -C "player-play $song_path"
+    else
+        err_msg "Audio NOT found."
+    fi
+}
+
 while [[ -z "$song_to_play" ]]; do
     if command -v cmus > /dev/null && command -v cmus-remote > /dev/null; then
         if [[ -n $(pidof cmus) ]]; then
-            # get user input and store it in song_to_play
-            read -rp ":: Play: " song_to_play
-            # ${var//search/replace}, searching for the string " " and
-            # replacing it with the wildcard "?" and storing it in $song
-            song=${song_to_play//\ /?}
-
-            # if music location variable specified, search through it
-            # if not, search in the default music directory
-            if [[ -n "$music" ]]; then
-                song_path=$(find "$music" -type f -iname "*$song*")
-            else
-                song_path=$(find "$HOME/Music" -type f -iname "*$song*")
-            fi
-
-            case $song_path in
-                "")
-                    err_msg "Audio NOT found."
-                    ;;
-
-                *)
-                    echo "=> Audio found!"
-                    sleep 0.2
-                    echo "Playing..."
-                    sleep 0.3
-                    cmus-remote -C "player-play $song_path"
-                    ;;
-            esac
+            play_song
         else
             # WEEE WEEE WEE WEEE (SIREN)
             # -e for escape so we can use colors :)
             # you can read the rest, can't you?
             err_msg "    cmus is ${uline}NOT${reset} running."
             # In the while-loop below, [Yy] means "Y" or "y". Same goes for [Nn].
-                read -rp "=> Do you want to run it? [y/N] " run_cmus
-                if [[ $run_cmus == [Yy] ]]; then
-                    run_cmus
-                else
-                    echo "Okay. See you soon."
-                    sleep 0.5
-                    exit
-                fi
+            read -rp "=> Do you want to run it? [y/N] " run_cmus
+            if [[ $run_cmus == [Yy] ]]; then
+                run_cmus
+            else
+                echo "Okay. See you soon."
+                sleep 0.5
+                exit
+            fi
         fi
     else
         err_msg "CMUS is ${uline}NOT${reset} installed."
